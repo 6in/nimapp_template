@@ -7,6 +7,7 @@ nimble を利用したnimアプリケーション開発用テンプレートで�
 * nimbleの標準的なファイル・フォルダ構成によるサンプルソース
 * ユニットテストのサンプルソース
 * cloneしたファイルの置換
+* .nimbleファイルのカスタムタスクのサンプル
 
 ### 諸注意
 
@@ -23,13 +24,18 @@ githubからclone後、```nimble rename```タスクを実行すると、元の�
 
 ```
 # アプリケーション名をsampleとします
-git clone https://github.com/6in/nimapp_template.git sample
+$ git clone https://github.com/6in/nimapp_template.git sample
 
 # フォルダに入ります
-cd sample
+$ cd sample
 
 # 内部のフォルダ・ファイル等をアプリケーション名に変換します
-nimble rename
+$ nimble rename
+
+# アプリケーションをビルドし、実行します
+$ nimble run
+{{hello [[nim]]}}
+
 ```
 
 ### 利用できるnimbleタスク一覧
@@ -131,7 +137,10 @@ lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> ~/.nimble/pkgs/sample-0.1.0/s
 nimble の testタスクを実行すると
 ```tests/``` ファイル名に **t** で始まるディレクトリtest内のすべてのファイルをコンパイルして実行します。
 
-nimble の testタスクは、.nimbleファイルの **backend** の値を参照していないようなので、test2というタスクを作成し、tests/alltest.nimを呼び出す仕組みとなっています。
+#### test2 タスク
+
+nimble の testタスクは、.nimbleファイルの **backend** の値を参照していないようなので、backendを指定し、tests/alltest.nim を呼び出す**test2**タスクを作成しています。
 
 test/alltest.nimでは、ユニットテストが記述されているソースをimportしているのみです。
 
+test2 タスクにすると、ユニットテストしたくないソースのimport文をコメントにするだけで制御できるので、使い勝手が良いかもしれません。
