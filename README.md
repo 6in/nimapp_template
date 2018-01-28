@@ -13,7 +13,7 @@ githubからclone後、```nimble rename```コマンドを実行すると、元�
 
 ```
 # アプリケーション名をsampleとします
-git clone https://github.com/6in/nimapp_template sample
+git clone https://github.com/6in/nimapp_template.git sample
 
 # フォルダに入ります
 cd sample
