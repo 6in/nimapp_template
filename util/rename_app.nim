@@ -89,11 +89,12 @@ when isMainModule:
 
   echo "=== rename files ==="
   for file in get_files(target_dir,false):
+    var org_file = joinPath(target_dir,file)
     var new_file = file.replace(package_name,new_package_name)
     if file != new_file:
       new_file = joinPath(target_dir,new_file)
       echo new_file
-      discard move_file(file,new_file)
+      discard move_file(org_file,new_file)
 
   echo "=== content ==="
   for file in get_files(target_dir,false):
