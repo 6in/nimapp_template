@@ -41,7 +41,9 @@ proc move_file(src,dst:string) : bool =
     if workPath != "" and workPath.existsDir() == false:
       discard workPath.existsOrCreateDir()
 
+  os.removeFile(dst)
   os.moveFile(src,dst)
+
   result = true
 
 proc replace_file_content(file,findStr,repStr: string) : file_change_result =

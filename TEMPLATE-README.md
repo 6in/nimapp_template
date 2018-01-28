@@ -4,7 +4,7 @@ nimble を利用したnimアプリケーション開発用テンプレートで�
 以下の特徴があります。
 
 * nimbleの標準的なファイル・フォルダ構成によるサンプルソース
-* ユニットテストのサンプル
+* ユニットテストのサンプルソース
 * cloneしたファイルの置換
 
 ### 利用方法
@@ -18,55 +18,89 @@ git clone https://github.com/6in/nimapp_template.git sample
 # フォルダに入ります
 cd sample
 
-# 内部ファイルをリネームします
+# 内部のフォルダ・ファイル等をアプリケーション名に変換します
 nimble rename
 ```
 
+### 利用できるnimbleタスク一覧
 
+| コマンド | 説明 |
+| ------- | ---- |
+| clean | bin,nimcacheを削除します |
+| test | ユニットテストの実行を行います |
+| test2 | nimbleに記述されている backend に基づきユニットテストを実行します |
+| build | デバッグビルドを行います |
+| install | リリースビルドを行います |
+| rename | テンプレートを置換します |
 
-### nimbleコマンド
+### renameタスクについて
 
-clean
-test
-test2
-build
-install
+renameコマンドは、nimapp_template.nimbleに記述されている```packageName```の内容をnimbleを起動した**カレントディレクトリの名前**に変換します。
+変換対象は、以下の３つです。
+* フォルダ
+* ファイル名
+* ファイルの中身
 
 ### ファイル・フォルダ構成
 
+#### clone直後
 ```
-.
-├── nimapp_template.nimble
-├── README.md
+sample
+├── nimapp_template.nimble        # nimbleファイル
+├── README.md                     # アプリケーション用のREADME.md
+├── TEMPLATE-README.md            # このテンプレートのREADME.md
+├── src                           # ソースフォルダ
+│   ├── nimapp_template.nim       # 起動ファイル
+│   └── nimapp_templatepkg        # パッケージフォルダ
+│       ├── main.nim              # mainソースファイル
+│       └── private
+│           └── main_impl.nim     # メイン実装用？お好きに利用ください
+├── tests                         # ユニットテストフォルダ
+│   ├── alltest.nim               # nimble test2タスクが呼び出すソース
+│   ├── nim.cfg                   # テスト用コンパイルオプション
+│   ├── test1.nim                 # ユニットテストソース(サンプル)
+│   └── test2.nim
+└── util                          # nimbleから呼び出すツール
+    └── rename_app.nim            # テンプレートファイル置換ツール
+```
+
+#### rename後
+
+```
+sample
+├── sample.nimble                 # ファイル名が変更
+├── README.md                     # 内容が変更
+├── TEMPLATE-README.md
 ├── src
-│   ├── nimapp_template.nim
-│   └── nimapp_templatepkg
-│       ├── main.nim
+│   ├── sample.nim                # ファイル名・内容が変更
+│   └── samplepkg                 # フォルダ名が変更
+│       ├── main.nim              
 │       └── private
 │           └── main_impl.nim
 ├── tests
-│   ├── alltest.nim
-│   ├── nim.cfg
-│   ├── test1.nim
-│   └── test2.nim
+│   ├── alltest.nim               # 内容が変更
+│   ├── nim.cfg       
+│   ├── test1.nim                 # 内容が変更
+│   └── test2.nim                 # 内容が変更
 └── util
     └── rename_app.nim
 ```
 
-### デバッグビルド
-```nimble build```
+### ビルドについて
 
-### リリースビルド
-```nimble install```
+* デバッグビルドの場合は```nimble build```を実行します
+* リリースビルドの場合は```nimble install```を実行します
 
-インストールしたモジュールは.nimble/pkgs/配下に格納され、実行モジュールは~/.nimble/bin配下にシンボリックリンクが作成されます
+インストールしたモジュールは ```~/.nimble/pkgs/```配下に格納され、実行モジュールは```~/.nimble/bin```配下に実行ファイルへのシンボリックリンクが作成されます
 
 ```
-6in% ls -la ~/.nimble/bin        
+% nimble install
+
+% ls -la ~/.nimble/bin        
 合計 0
 drwxr-xr-x. 2 6in 6in  83  1月 26 10:50 .
 drwxr-xr-x. 4 6in 6in 103  3月 24  2016 ..
-lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> /home/6in/.nimble/pkgs/sample-0.1.0/sample
+lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> ~/.nimble/pkgs/sample-0.1.0/sample
 ```
 
 ```
@@ -81,7 +115,8 @@ lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> /home/6in/.nimble/pkgs/sample
 └── nimblemeta.json
 ```
 
-テスト実行
+### テスト実行について
 
+nimble の testタスクを実行すると
 ```tests/``` ファイル名に 't'で始まるディレクトリtest内のすべてのファイルをコンパイルして実行する
 
