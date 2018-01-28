@@ -11,14 +11,17 @@ proc get_files(path:string, dir:bool) : seq[string] =
   result = @[]
   let path_len = path.len()
   for file in walkDirRec(path):
-    var new_file = file
-    var continue_flag = false
-    
+    var 
+      new_file = file
+      skip_flag = false
+
+    # 探索スキップチェック
     for name in file.split(DirSep):
       if name.startsWith("nimcache") or name.startsWith("bin") or name.startsWith(".git") :
-        continue_flag = true
-        continue
-    if continue_flag:
+        skip_flag = true
+        break
+
+    if skip_flag:
         continue
 
     if dir :
@@ -41,7 +44,8 @@ proc move_file(src,dst:string) : bool =
     if workPath != "" and workPath.existsDir() == false:
       discard workPath.existsOrCreateDir()
 
-  os.removeFile(dst)
+  if dst.existsFile():
+    os.removeFile(dst)
   os.moveFile(src,dst)
 
   result = true
@@ -60,12 +64,13 @@ proc replace_file_content(file,findStr,repStr: string) : file_change_result =
     # add line to seq
     buff.add newLine
 
-  # output temp dir
+  # output file to temp dir
   if result.changed:
-    let tmp = os.getTempDir()
-    let s_file = file.splitPath()
+    let 
+      tmp = os.getTempDir()
+      s_file = file.splitPath()
     result.file = joinPath(tmp,s_file.tail)
-    let f : File = open(result.file,FileMode.fmWrite)
+    let f = open(result.file,FileMode.fmWrite)
     defer:
       f.close()
     for line in buff:
@@ -76,8 +81,7 @@ when isMainModule:
     cmdArgs = os.commandLineParams()
     target_dir = os.expandFilename(cmdArgs[0])
     package_name = cmdArgs[1]
-  
-  var new_package_name = ospaths.splitPath(target_dir).tail
+    new_package_name = ospaths.splitPath(target_dir).tail
 
   if package_name == new_package_name:
     echo "オリジナルのテンプレートなので終了します"
@@ -87,11 +91,11 @@ when isMainModule:
 
   echo "=== rename files ==="
   for file in get_files(target_dir,false):
-    var org_file = joinPath(target_dir,file)
+    let org_file = joinPath(target_dir,file)
     var new_file = file.replace(package_name,new_package_name)
     if file != new_file:
+      echo "mv " , file , " " , new_file
       new_file = joinPath(target_dir,new_file)
-      echo new_file
       discard move_file(org_file,new_file)
 
   echo "=== content ==="

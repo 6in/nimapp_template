@@ -7,7 +7,7 @@ nimble を利用したnimアプリケーション開発用テンプレートで�
 * nimbleの標準的なファイル・フォルダ構成によるサンプルソース
 * ユニットテストのサンプルソース
 * cloneしたファイルの置換
-* .nimbleファイルのカスタムタスクのサンプル
+* .nimbleのカスタムタスクのサンプル
 
 ### 諸注意
 
@@ -23,7 +23,7 @@ backend = "c"
 githubからclone後、```nimble rename```タスクを実行すると、元のテンプレート名に関連する構成ファイル名やソース内のパッケージ名等を置換します。
 
 ```
-# アプリケーション名をsampleとします
+# アプリケーション名を sample とします
 $ git clone https://github.com/6in/nimapp_template.git sample
 
 # フォルダに入ります
