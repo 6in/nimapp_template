@@ -29,16 +29,6 @@ proc rename_path(path,findStr,repStr: string) : string =
     let name = fileInfo.tail.replace(findStr,repStr)
     result = joinPath(fileInfo.head,name)
 
-proc rep_str(line,f,r: string) : string =
-  result = line
-  if f == r :
-    return
-  if line.find(f) == -1 :
-    return 
-  else:
-    result = line.replace(f,r)
-  result = rep_str(result,f,r)
-
 proc move_file(src,dst:string) : bool =
   result = false
   # dstのフォルダを生成する
@@ -65,7 +55,7 @@ proc replace_file_content(file,findStr,repStr: string) : file_change_result =
     if findIndex >= 0:
       result.changed = true
       # replace word
-      newLine = rep_str(line,findStr,repStr)
+      newLine = line.replace(findStr,repStr)
     # add line to seq
     buff.add newLine
 
@@ -82,8 +72,9 @@ proc replace_file_content(file,findStr,repStr: string) : file_change_result =
 
 when isMainModule:
   let target_dir = os.expandFilename(os.commandLineParams()[0])
+  echo target_dir
   let package_name = os.commandLineParams()[1]
-  var new_package_name = ospaths.splitPath(os.getCurrentDir()).tail
+  var new_package_name = ospaths.splitPath(target_dir).tail
   if package_name == new_package_name:
     new_package_name = "sample"
 
@@ -98,11 +89,11 @@ when isMainModule:
 
   echo "=== rename files ==="
   for file in get_files(target_dir,false):
-    var new_file = rep_str(file,package_name,new_package_name)
+    var new_file = file.replace(package_name,new_package_name)
     if file != new_file:
       new_file = joinPath(target_dir,new_file)
       echo new_file
-      discard move_file(file,new_file)
+      #discard move_file(file,new_file)
 
   echo "=== content ==="
   for file in get_files(target_dir,false):
@@ -110,5 +101,5 @@ when isMainModule:
     let tmp_file = replace_file_content(new_file,package_name,new_package_name)
     if tmp_file.changed :
       echo "mv " , $tmp_file.file , " " , new_file
-      discard move_file(tmp_file.file,new_file)
+      #discard move_file(tmp_file.file,new_file)
 
