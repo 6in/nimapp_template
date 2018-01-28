@@ -102,7 +102,7 @@ when isMainModule:
     if file != new_file:
       new_file = joinPath(target_dir,new_file)
       echo new_file
-      discard move_file(file,new_file)
+      #discard move_file(file,new_file)
 
   echo "=== content ==="
   for file in get_files(target_dir,false):
@@ -110,5 +110,5 @@ when isMainModule:
     let tmp_file = replace_file_content(newFile,package_name,new_package_name)
     if tmp_file.changed :
       echo "mv " , $tmp_file.file , " " , newFile
-      discard move_file(tmp_file.file,file)
+      #discard move_file(tmp_file.file,file)
 
