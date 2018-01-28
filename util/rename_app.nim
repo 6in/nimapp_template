@@ -12,33 +12,32 @@ proc get_files(path:string, dir:bool) : seq[string] =
   let path_len = path.len()
   for file in walkDirRec(path):
     var new_file = file
-    if new_file.find("nimcache",0) >= 0 or new_file.find("bin",0) >= 0 or new_file.find(".git",0) >= 0 :
-      continue
+    var continue_flag = false
+    
+    for name in file.split(DirSep):
+      if name.startsWith("nimcache") or name.startsWith("bin") or name.startsWith(".git") :
+        continue_flag = true
+        continue
+    if continue_flag:
+        continue
 
     if dir :
       new_file = ospaths.splitPath(new_file).head
       if result.contains(new_file) == true:
         continue
     result.add new_file[ path_len+1 .. new_file.len()-1 ]
-  
-proc rename_path(path,findStr,repStr: string) : string =
-  let fileInfo = ospaths.splitPath(path)
-  result = path
-  # ファイル名を検索
-  if fileInfo.tail.find(findStr) >= 0 :
-    let name = fileInfo.tail.replace(findStr,repStr)
-    result = joinPath(fileInfo.head,name)
 
 proc move_file(src,dst:string) : bool =
   result = false
   # dstのフォルダを生成する
-  let dstParent = dst.splitPath().head.split("/")
+  let dstParent = dst.splitPath().head.split(DirSep)
   # echo dstParent
-  var workPath = "/"
+  var workPath = ""
+  if not dstParent[0].endsWith(":") :
+    workPath = repeatChar(1,DirSep)
+  # ディレクトリを作成する
   for p in dstParent:
     workPath = joinPath(workPath,p) 
-    # echo "[" , workPath , "]"
-
     if workPath != "" and workPath.existsDir() == false:
       discard workPath.existsOrCreateDir()
 
@@ -71,21 +70,18 @@ proc replace_file_content(file,findStr,repStr: string) : file_change_result =
       f.writeLine line
 
 when isMainModule:
-  let target_dir = os.expandFilename(os.commandLineParams()[0])
-  echo target_dir
-  let package_name = os.commandLineParams()[1]
+  let 
+    cmdArgs = os.commandLineParams()
+    target_dir = os.expandFilename(cmdArgs[0])
+    package_name = cmdArgs[1]
+  
   var new_package_name = ospaths.splitPath(target_dir).tail
+
   if package_name == new_package_name:
-    new_package_name = "sample"
+    echo "オリジナルのテンプレートなので終了します"
+    quit(1)
 
   echo package_name , " => " , new_package_name 
-
-  # echo "=== rename dirs ==="
-  # for file in get_files(target_dir,true):
-  #   var new_file = rename_path(file,package_name,new_package_name)
-  #   if file != new_file:
-  #     echo new_file
-      #discard move_file(file,new_file)
 
   echo "=== rename files ==="
   for file in get_files(target_dir,false):
@@ -104,3 +100,6 @@ when isMainModule:
       echo "mv " , $tmp_file.file , " " , new_file
       discard move_file(tmp_file.file,new_file)
 
+  echo "=== remoce empy dir ==="
+  for file in walkDirs (target_dir & "/*"):
+    echo file

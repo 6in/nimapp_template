@@ -1,61 +1,41 @@
+## 概要
 
+nimble を利用したnimアプリケーション開発用テンプレートです。
+以下の特徴があります。
 
-ツリー構造
-```
-mkdir nimble_test
-cd nimble_test
-nimble init
-```
+* nimbleの標準的なファイル・フォルダ構成
+* ユニットテストのサンプル
+* cloneしたファイルの置換
 
-```nim: nimble_test.nimble
-# Package
+### 利用方法
 
-version       = "0.1.0"
-author        = "input your name"
-description   = "nimble sample"
-license       = "MIT"
-
-# Dependencies
-
-requires "nim >= 0.17.2"
-```
+githubからclone後、```nimble rename```コマンドを実行すると、元のテンプレート名に関連する構成ファイル名やソース内のパッケージ名等を置換します。
 
 ```
-mkdir src
-mkdir bin
-echo "echo \"hello nim\"" > src/nimble_test.nim
+# アプリケーション名をsampleとします
+git clone https://github.com/6in/nimapp_template sample
+
+# フォルダに入ります
+cd sample
+
+# 内部ファイルをリネームします
+nimble rename
 ```
 
-```nim: nimble_test.nimble
-# Package
+### nimbleコマンド
 
-version       = "0.1.0"
-author        = "6in"
-description   = "nimble sample"
-license       = "MIT"
-srcDir        = "src"
-binDir        = "bin"
-bin           = @[ "nimble_test" ]
+clean
+test
+test2
+build
+install
 
-# Dependencies
+### ファイル・フォルダ構成
 
-requires "nim >= 0.17.2"
-```
-
-ビルドしてみる
-```
-nimble build
-
-ls -la bin
-drwxrwxr-x 2 6in 6in   60  1月 25 14:47 .
-drwxrwxr-x 4 6in 6in  120  1月 25 14:42 ..
--rwxr-xr-x 1 6in 6in 181K  1月 25 14:46 nimble_test
-```
-
-デバッグビルド
+### デバッグビルド
 ```nimble build```
 
-リリースビルド
+### リリースビルド
 ```nimble install```
 
 インストールしたモジュールは.nimble/pkgs/配下に格納され、実行モジュールは~/.nimble/bin配下にシンボリックリンクが作成されます
