@@ -51,7 +51,7 @@ proc move_file(src,dst:string) : bool =
     if workPath != "" and workPath.existsDir() == false:
       discard workPath.existsOrCreateDir()
 
-  os.copyFile(src,dst)
+  os.moveFile(src,dst)
   result = true
 
 proc replace_file_content(file,findStr,repStr: string) : file_change_result =
@@ -95,13 +95,6 @@ when isMainModule:
       if file != new_name:
         echo new_name
 
-  echo "=== rename dirs ==="
-  for file in get_files(target_dir,true):
-    let new_name = rename_path(file,package_name,new_package_name)
-    if new_name.startsWith(target_dir):
-      if file != new_name:
-        echo new_name
-
   echo "=== content ==="
   for file in get_files(target_dir,false):
     let tmp_file = replace_file_content(file,package_name,new_package_name)
@@ -114,5 +107,5 @@ when isMainModule:
   echo "=== copy file ==="
   discard move_file(
     "/mnt/c/Users/0hya6/workspaces/workspace-nim/nimapp_template/src/nimapp_templatepkg/private/main_impl.nim",
-    "/mnt/c/Users/0hya6/workspaces/workspace-nim/nimapp_template/src/samplepkg/private/main_impl.nim"
+    "/mnt/c/Users/0hya6/workspaces/workspace-nim/nimapp_template/src/samplepkg/private/main_impl2.nim"
   )
