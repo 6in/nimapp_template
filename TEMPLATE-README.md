@@ -40,7 +40,7 @@ $ nimble run
 
 ### 利用できるnimbleタスク一覧
 
-| コマンド | 説明 |
+| タスク | 説明 |
 | ------- | ---- |
 | clean | bin,nimcacheを削除します |
 | test | ユニットテストの実行を行います |
@@ -52,7 +52,7 @@ $ nimble run
 
 ### renameタスクについて
 
-renameコマンドは、nimapp_template.nimbleに記述されている```packageName```の内容をnimbleを起動した**カレントディレクトリの名前**に変換します。
+renameタスクは、nimapp_template.nimbleに記述されている```packageName```の内容をnimbleを起動した**カレントディレクトリの名前**に変換します。
 変換対象は、以下の３つです。
 * フォルダ
 * ファイル名
@@ -134,6 +134,8 @@ lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> ~/.nimble/pkgs/sample-0.1.0/s
 
 ### ユニットテストについて
 
+#### test タスク
+
 nimble の testタスクを実行すると
 ```tests/``` ファイル名に **t** で始まるディレクトリtest内のすべてのファイルをコンパイルして実行します。
 
@@ -143,4 +145,4 @@ nimble の testタスクは、.nimbleファイルの **backend** の値を参照
 
 test/alltest.nimでは、ユニットテストが記述されているソースをimportしているのみです。
 
-test2 タスクにすると、ユニットテストしたくないソースのimport文をコメントにするだけで制御できるので、使い勝手が良いかもしれません。
+test2 タスクにすると、tests/alltest.nimソースの、ユニットテストソースのimport文をコメントON/OFFにするだけで制御できるので、使い勝手が良いかもしれません。
