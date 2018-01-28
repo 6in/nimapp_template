@@ -11,15 +11,15 @@ proc get_files(path:string, dir:bool) : seq[string] =
   result = @[]
   let path_len = path.len()
   for file in walkDirRec(path):
-    var newFile = file
-    if newFile.find("nimcache",0) >= 0 or newFile.find("bin",0) >= 0 or newFile.find(".git",0) >= 0 :
+    var new_file = file
+    if new_file.find("nimcache",0) >= 0 or new_file.find("bin",0) >= 0 or new_file.find(".git",0) >= 0 :
       continue
 
     if dir :
-      newFile = ospaths.splitPath(newFile).head
-      if result.contains(newFile) == true:
+      new_file = ospaths.splitPath(new_file).head
+      if result.contains(new_file) == true:
         continue
-    result.add newFile[ path_len+1 .. newFile.len()-1 ]
+    result.add new_file[ path_len+1 .. new_file.len()-1 ]
   
 proc rename_path(path,findStr,repStr: string) : string =
   let fileInfo = ospaths.splitPath(path)
@@ -106,9 +106,9 @@ when isMainModule:
 
   echo "=== content ==="
   for file in get_files(target_dir,false):
-    var newFile = joinPath(target_dir,file)
-    let tmp_file = replace_file_content(newFile,package_name,new_package_name)
+    var new_file = joinPath(target_dir,file)
+    let tmp_file = replace_file_content(new_file,package_name,new_package_name)
     if tmp_file.changed :
-      echo "mv " , $tmp_file.file , " " , newFile
-      discard move_file(tmp_file.file,file)
+      echo "mv " , $tmp_file.file , " " , new_file
+      discard move_file(tmp_file.file,new_file)
 
