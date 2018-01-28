@@ -1,0 +1,9 @@
+{
+  "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\bash.exe",
+  "termnial.integrated.shell.unixlike": "bash.exe",
+  "window.zoomLevel": 1,
+  "workbench.panel.location": "bottom",
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+
+}
