@@ -16,6 +16,10 @@ backend       = "cpp"                     # デフォルトはC
 
 requires "nim >= 0.17.2"
 
+task run, "アプリケーションを実行します":
+  exec "nimble build"
+  exec "bin/" & packageName
+
 task test2, "テスト実行":                  # デフォルトのtestコマンドは、backendの値を参照しない
   # キャッシュファイルをクリア
   exec "nimble clean"
@@ -42,3 +46,4 @@ task rename_test, "リネームテスト用":
   exec "cp -rp . ../nimapp_template2"
   exec "nim c -r --out:bin/rename_app util/rename_app.nim ../nimapp_template2 " & packageName
   rmDir "../nimapp_template2/src/" & packageName & "pkg"
+

@@ -1,15 +1,25 @@
 ## 概要
 
 nimble を利用したnimアプリケーション開発用テンプレートです。
+
 以下の特徴があります。
 
 * nimbleの標準的なファイル・フォルダ構成によるサンプルソース
 * ユニットテストのサンプルソース
 * cloneしたファイルの置換
 
-### 利用方法
+### 諸注意
 
-githubからclone後、```nimble rename```コマンドを実行すると、元のテンプレート名に関連する構成ファイル名やソース内のパッケージ名等を置換します。
+* windowsで実行する際は、[こちら](https://qiita.com/yufu/items/86a455f948a3e1c0ef97)を参考に、コマンドプロンプトの設定を行ってください。
+* nimのコンパイルモードはC++を指定しています。c言語に戻したいときは、*.nimble の backend を cに変更してください。
+
+```nim:nimapp_template.nimble
+backend = "c"
+```
+
+### テンプレートの利用方法
+
+githubからclone後、```nimble rename```タスクを実行すると、元のテンプレート名に関連する構成ファイル名やソース内のパッケージ名等を置換します。
 
 ```
 # アプリケーション名をsampleとします
@@ -28,6 +38,7 @@ nimble rename
 | ------- | ---- |
 | clean | bin,nimcacheを削除します |
 | test | ユニットテストの実行を行います |
+| run | アプリケーションを実行します |
 | test2 | nimbleに記述されている backend に基づきユニットテストを実行します |
 | build | デバッグビルドを行います |
 | install | リリースビルドを行います |
@@ -68,7 +79,7 @@ sample
 
 ```
 sample
-├── sample.nimble                 # ファイル名が変更
+├── sample.nimble                 # ファイル名・内容が変更
 ├── README.md                     # 内容が変更
 ├── TEMPLATE-README.md
 ├── src
@@ -91,7 +102,7 @@ sample
 * デバッグビルドの場合は```nimble build```を実行します
 * リリースビルドの場合は```nimble install```を実行します
 
-インストールしたモジュールは ```~/.nimble/pkgs/```配下に格納され、実行モジュールは```~/.nimble/bin```配下に実行ファイルへのシンボリックリンクが作成されます
+リリースビルドしたモジュールは ```~/.nimble/pkgs/```配下に格納され、実行モジュールは```~/.nimble/bin/```配下に実行ファイルへのシンボリックリンクが作成されます。
 
 ```
 % nimble install
@@ -115,8 +126,12 @@ lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> ~/.nimble/pkgs/sample-0.1.0/s
 └── nimblemeta.json
 ```
 
-### テスト実行について
+### ユニットテストについて
 
 nimble の testタスクを実行すると
-```tests/``` ファイル名に 't'で始まるディレクトリtest内のすべてのファイルをコンパイルして実行する
+```tests/``` ファイル名に **t** で始まるディレクトリtest内のすべてのファイルをコンパイルして実行します。
+
+nimble の testタスクは、.nimbleファイルの **backend** の値を参照していないようなので、test2というタスクを作成し、tests/alltest.nimを呼び出す仕組みとなっています。
+
+test/alltest.nimでは、ユニットテストが記述されているソースをimportしているのみです。
 
