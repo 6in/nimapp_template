@@ -99,7 +99,3 @@ when isMainModule:
     if tmp_file.changed :
       echo "mv " , $tmp_file.file , " " , new_file
       discard move_file(tmp_file.file,new_file)
-
-  echo "=== remoce empy dir ==="
-  for file in walkDirs (target_dir & "/*"):
-    echo file

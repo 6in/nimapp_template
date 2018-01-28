@@ -30,8 +30,10 @@ task clean, "キャッシュのクリア":
   mkDir "bin"
 
 task rename, "プロジェクト名を伴うファイル名・内容を置換します":
+  rmDir ".git"
   mkDir "bin"
   exec "nim c -r --out:bin/rename_app util/rename_app.nim . " & packageName
+  rmDir "src/" & packageName & "pkg"
   exec "nimble clean"
 
 task rename_test, "リネームテスト用":
@@ -39,3 +41,4 @@ task rename_test, "リネームテスト用":
   rmDir "../nimapp_template2"
   exec "cp -rp . ../nimapp_template2"
   exec "nim c -r --out:bin/rename_app util/rename_app.nim ../nimapp_template2 " & packageName
+  rmDir "../nimapp_template2/src/" & packageName & "pkg"
