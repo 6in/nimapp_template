@@ -1,6 +1,6 @@
 # Package
 
-packageName   = "nimapp_template"
+packageName   = "sample"
 version       = "0.1.0"
 author        = "input your name"
 description   = "sample app with nimble"
@@ -8,7 +8,7 @@ license       = "MIT"
 
 srcDir        = "src"                     # ソースフォルダ
 binDir        = "bin"                     # 実行モジュールを配置するフォルダ
-bin           = @[ "nimapp_template" ]    # アプリケーションファイル名
+bin           = @[ "sample" ]    # アプリケーションファイル名
 skipDirs      = @[ "tests" , "util" ]     # nimble install時にスキップするフォルダ
 backend       = "cpp"                     # デフォルトはC
 
@@ -30,4 +30,7 @@ task clean, "キャッシュのクリア":
   mkDir "bin"
 
 task rename, "プロジェクト名を伴うファイル名・内容を置換します":
-  exec "nim c -r --out:bin/rename_app util/rename_app.nim . " & packageName
+  rmDir "../sample2"
+  exec "cp -rp . ../sample2"
+  exec "nim c -r --out:bin/rename_app util/rename_app.nim ../sample2 " & packageName
+  

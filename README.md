@@ -65,15 +65,15 @@ drwxrwxr-x 4 6in 6in  120  1月 25 14:42 ..
 合計 0
 drwxr-xr-x. 2 6in 6in  83  1月 26 10:50 .
 drwxr-xr-x. 4 6in 6in 103  3月 24  2016 ..
-lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 nimapp_template -> /home/6in/.nimble/pkgs/nimapp_template-0.1.0/nimapp_template
+lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> /home/6in/.nimble/pkgs/sample-0.1.0/sample
 ```
 
 ```
-~/.nimble/pkgs/nimapp_template-0.1.0
-├── nimapp_template
-├── nimapp_template.nim
-├── nimapp_template.nimble
-├── nimapp_templatepkg
+~/.nimble/pkgs/sample-0.1.0
+├── sample
+├── sample.nim
+├── sample.nimble
+├── samplepkg
 │   ├── main.nim
 │   └── private
 │       └── main_impl.nim

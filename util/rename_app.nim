@@ -9,16 +9,17 @@ type
 
 proc get_files(path:string, dir:bool) : seq[string] =
   result = @[]
+  let path_len = path.len()
   for file in walkDirRec(path):
-    if file.find("nimcache",0) >= 0 or file.find("bin",0) >= 0 or file.find(".git",0) >= 0 :
+    var newFile = file
+    if newFile.find("nimcache",0) >= 0 or newFile.find("bin",0) >= 0 or newFile.find(".git",0) >= 0 :
       continue
-    let absFile = file
+
     if dir :
-      let dirNames = ospaths.splitPath(absFile) 
-      if result.contains(dirNames.head) == false:
-        result.add dirNames.head
-    else:
-      result.add file
+      newFile = ospaths.splitPath(newFile).head
+      if result.contains(newFile) == true:
+        continue
+    result.add newFile[ path_len+1 .. newFile.len()-1 ]
   
 proc rename_path(path,findStr,repStr: string) : string =
   let fileInfo = ospaths.splitPath(path)
@@ -42,11 +43,11 @@ proc move_file(src,dst:string) : bool =
   result = false
   # dstのフォルダを生成する
   let dstParent = dst.splitPath().head.split("/")
-  echo dstParent
+  # echo dstParent
   var workPath = "/"
   for p in dstParent:
     workPath = joinPath(workPath,p) 
-    echo "[" , workPath , "]"
+    # echo "[" , workPath , "]"
 
     if workPath != "" and workPath.existsDir() == false:
       discard workPath.existsOrCreateDir()
@@ -88,24 +89,26 @@ when isMainModule:
 
   echo package_name , " => " , new_package_name 
 
+  # echo "=== rename dirs ==="
+  # for file in get_files(target_dir,true):
+  #   var new_file = rename_path(file,package_name,new_package_name)
+  #   if file != new_file:
+  #     echo new_file
+      #discard move_file(file,new_file)
+
   echo "=== rename files ==="
   for file in get_files(target_dir,false):
-    let new_name = rename_path(file,package_name,new_package_name)
-    if new_name.startsWith(target_dir):
-      if file != new_name:
-        echo new_name
+    var new_file = rep_str(file,package_name,new_package_name)
+    if file != new_file:
+      new_file = joinPath(target_dir,new_file)
+      echo new_file
+      discard move_file(file,new_file)
 
   echo "=== content ==="
   for file in get_files(target_dir,false):
-    let tmp_file = replace_file_content(file,package_name,new_package_name)
+    var newFile = joinPath(target_dir,file)
+    let tmp_file = replace_file_content(newFile,package_name,new_package_name)
     if tmp_file.changed :
-      echo "mv " , $tmp_file.file , " " , file
+      echo "mv " , $tmp_file.file , " " , newFile
+      discard move_file(tmp_file.file,file)
 
-  echo ospaths.splitPath(os.getCurrentDir()).tail
-  echo os.getCurrentDir()
-
-  echo "=== copy file ==="
-  discard move_file(
-    "/mnt/c/Users/0hya6/workspaces/workspace-nim/nimapp_template/src/nimapp_templatepkg/private/main_impl.nim",
-    "/mnt/c/Users/0hya6/workspaces/workspace-nim/nimapp_template/src/samplepkg/private/main_impl2.nim"
-  )
