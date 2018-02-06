@@ -44,15 +44,15 @@ $ nimble run
 | ------- | ---- |
 | clean | bin,nimcacheを削除します |
 | test | ユニットテストの実行を行います |
-| run | アプリケーションを実行します |
 | test2 | nimbleに記述されている backend に基づきユニットテストを実行します |
+| run | アプリケーションを実行します |
 | build | デバッグビルドを行います |
 | install | リリースビルドを行います |
 | rename | テンプレートを置換します |
 
 ### renameタスクについて
 
-renameタスクは、nimapp_template.nimbleに記述されている```packageName```の内容をnimbleを起動した**カレントディレクトリの名前**に変換します。
+renameタスクは、nimapp_template.nimbleに記述されている```packageName```の内容を取得し、nimbleを起動した**カレントディレクトリの名前**に変換します。
 変換対象は、以下の３つです。
 * フォルダ
 * ファイル名

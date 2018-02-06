@@ -15,10 +15,12 @@ backend       = "cpp"                     # デフォルトはC
 # Dependencies
 
 requires "nim >= 0.17.2"
+requires "docopt >= 0.6.5"
+
 
 task run, "アプリケーションを実行します":
   exec "nimble build"
-  exec "bin/" & packageName
+  exec "bin/" & packageName & " nim"
 
 task test2, "テスト実行":                  # デフォルトのtestコマンドは、backendの値を参照しない
   # キャッシュファイルをクリア
