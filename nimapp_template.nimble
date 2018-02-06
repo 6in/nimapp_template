@@ -10,13 +10,12 @@ srcDir        = "src"                     # ソースフォルダ
 binDir        = "bin"                     # 実行モジュールを配置するフォルダ
 bin           = @[ "nimapp_template" ]    # アプリケーションファイル名
 skipDirs      = @[ "tests" , "util" ]     # nimble install時にスキップするフォルダ
-backend       = "cpp"                     # デフォルトはC
+backend       = "c"                       # デフォルトはc
 
 # Dependencies
 
 requires "nim >= 0.17.2"
 requires "docopt >= 0.6.5"
-
 
 task run, "アプリケーションを実行します":
   exec "nimble build"

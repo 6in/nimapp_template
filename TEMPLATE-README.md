@@ -67,7 +67,7 @@ sample
 ├── README.md                     # アプリケーション用のREADME.md
 ├── TEMPLATE-README.md            # このテンプレートのREADME.md
 ├── src                           # ソースフォルダ
-│   ├── nimapp_template.nim       # 起動ファイル
+│   ├── nimapp_template.nim       # 起動ファイル(docoptによるパース)
 │   └── nimapp_templatepkg        # パッケージフォルダ
 │       ├── main.nim              # mainソースファイル
 │       └── private
@@ -131,6 +131,13 @@ lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> ~/.nimble/pkgs/sample-0.1.0/s
 │       └── main_impl.nim
 └── nimblemeta.json
 ```
+
+### アプリケーション実行について
+
+#### runタスク
+
+*.nimbleに記述されている
+
 
 ### ユニットテストについて
 
