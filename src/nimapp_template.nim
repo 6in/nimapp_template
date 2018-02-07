@@ -1,7 +1,5 @@
-import parseopt2
-
-import nimapp_templatepkg/main
 import docopt
+import nimapp_templatepkg/main
 
 let doc = """
 nimapp_template.
