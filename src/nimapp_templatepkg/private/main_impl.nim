@@ -1,5 +1,5 @@
 
-proc c_sprintf(buf, frmt: cstring): cint {.header: "<stdio.h>", importc: "sprintf", varargs.}
+proc c_sprintf(buf: array[0..2500, char], frmt: cstring): cint {.header: "<stdio.h>", importc: "sprintf", varargs.}
 
 proc say_hello_to_imple (name: string) : string = "hello [[" & name & "]]" 
 
