@@ -6,7 +6,7 @@ import os
 # スレッド処理
 proc threadFunc(param: tuple[a,b:int]) {.thread.} = 
   for x in param.a..param.b :
-    echo "wait:" & x
+    echo "wait:" & $x
     sleep(1000)
 
 proc main*(args:Table[string,Value]) : int =
