@@ -5,13 +5,14 @@ let doc = """
 nimapp_template.
 
 Usage:
-  nimapp_template <name>
+  nimapp_template [--sample=<sample>] <name>
   nimapp_template (-h | --help)
   nimapp_template --version
 
 Options:
-  -h --help     Show this screen.
-  --version     Show version.
+  --sample=<sample>  sample option[default: abcdefg].
+  -h --help          Show this screen.
+  --version          Show version.
 """
 
 # 引数チェック

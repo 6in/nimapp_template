@@ -14,8 +14,8 @@ backend       = "c"                       # デフォルトはc
 
 # Dependencies
 
-requires "nim >= 0.17.2"
-requires "docopt >= 0.6.5"
+requires "nim >= 0.19.0"
+requires "docopt >= 0.6.7"
 
 task run, "アプリケーションを実行します":
   exec "nimble build"

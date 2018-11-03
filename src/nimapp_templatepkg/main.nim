@@ -7,7 +7,7 @@ import os
 proc threadFunc(param: tuple[a,b:int]) {.thread.} = 
   for x in param.a..param.b :
     echo "wait:" & $x
-    sleep(1000)
+    sleep(100)
 
 proc main*(args:Table[string,Value]) : int =
   result = 0
@@ -16,8 +16,12 @@ proc main*(args:Table[string,Value]) : int =
 
   # スレッドサンプル
   var thr: array[0..1, Thread[tuple[a,b:int]]]
-  createThread(thr[0],threadFunc,(1,10))
+  echo "start threads"
+  thr[0].createThread(threadFunc,(1,10))
+  echo "wait threads"
+  sleep(1000)  
   joinThreads( thr )
+
 
 
 

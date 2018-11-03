@@ -37,7 +37,7 @@ proc move_file(src,dst:string) : bool =
   # echo dstParent
   var workPath = ""
   if not dstParent[0].endsWith(":") :
-    workPath = repeatChar(1,DirSep)
+    workPath = repeat(DirSep,1)
   # ディレクトリを作成する
   for p in dstParent:
     workPath = joinPath(workPath,p) 
