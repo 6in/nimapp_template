@@ -1,0 +1,49 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            // アプリケーションを実行します
+            "label": "Run Application",
+            "type": "shell",
+            "command": "nimble run",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            // テストを実行します
+            "label": "Run Test",
+            "type": "shell",
+            "command": "nimble test",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            // 現在編集しているソースをデバッグビルドします
+            "label": "Debug Build Current File",
+            "type": "shell",
+            "command": "nim c -d:debug --debuginfo --lineDir:on --debugger:native --laxStrings:on --nilseqs:on --threads:on -o:${workspaceRoot}/bin/test ${file}",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
+            // 現在のプロジェクトをデバッグビルドします
+            "label": "Debug Project File",
+            "type": "shell",
+            "command": "nim c -d:debug --debuginfo --lineDir:on --debugger:native --laxStrings:on --nilseqs:on --threads:on -o:${workspaceRoot}/bin/test ${workspaceRoot}/src/nimapp_template.nim",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        }
+    ]
+}

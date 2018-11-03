@@ -1,0 +1,32 @@
+// 既定の設定を上書きするには、このファイル内に設定を挿入します
+{
+    "terminal.integrated.shell.windows": "C:\\Windows\\sysnative\\cmd.exe",
+    // "terminal.integrated.shellArgs.windows": [
+    //     "/k ",
+    //     "chcp ",
+    //     "65001 "
+    // ],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+
+    // Nim project file, if empty use current selected.
+    "nim.project": [],
+
+    // Optional test project.
+    "nim.test-project": "",
+
+    // Execute build task from tasks.json file on save.
+    "nim.buildOnSave": true,
+
+    // Nim build command (c, cpp, doc, etc)
+    "nim.buildCommand": "c",
+
+    // Check code by using 'nim check' on save.
+    "nim.lintOnSave": true,
+
+    // Enable verbose logging of nimsuggest to use profile directory.
+    "nim.logNimsuggest": false,
+
+
+
+}
