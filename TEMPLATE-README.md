@@ -143,13 +143,21 @@ lrwxrwxrwx  1 6in 6in  61  1月 26 10:09 sample -> ~/.nimble/pkgs/sample-0.1.0/s
 
 #### test タスク
 
-nimble の testタスクを実行すると
+* nimble の testタスクを実行すると
 ```tests/``` ファイル名に **t** で始まるディレクトリtest内のすべてのファイルをコンパイルして実行します。
 
 #### test2 タスク
 
-nimble の testタスクは、.nimbleファイルの **backend** の値を参照していないようなので、backendを指定し、tests/alltest.nim を呼び出す**test2**タスクを作成しています。
+* nimble の testタスクは、.nimbleファイルの **backend** の値を参照していないようなので、backendを指定し、tests/alltest.nim を呼び出す**test2**タスクを作成しています。
 
-test/alltest.nimでは、ユニットテストが記述されているソースをimportしているのみです。
+* test/alltest.nimでは、ユニットテストが記述されているソースをimportしているのみです。
 
-test2 タスクにすると、tests/alltest.nimソースの、ユニットテストソースのimport文をコメントON/OFFにするだけで制御できるので、使い勝手が良いかもしれません。
+* test2 タスクにすると、tests/alltest.nimソースの、ユニットテストソースのimport文をコメントON/OFFにするだけで制御できるので、使い勝手が良いかもしれません。
+
+### VSCodeでのデバッグについて
+
+* nim 0.19.0対応に伴い、native-debugプラグインをインストールすることにより、VSCodeでのデバッグ(ステップ実行)ができる設定を追加しています。
+* ソースを編集し保存すると、デバッグビルドが自動で実行されます。
+  * この機能をOFFにするには、```.vscode/setting.json```"nim.buildOnSave"をfalseにします
+* ```ctrl+shift+b```でビルド実行します。
+* F5キーでデバッグ実行を開始します。
