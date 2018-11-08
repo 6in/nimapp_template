@@ -13,7 +13,19 @@
             "cwd": "${workspaceRoot}"
         },
         {
-            "name": "Start Debug(Mac/Linux)",
+            "name": "Start Debug(linux)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/test",
+            "args": ["test"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "gdb"
+        },
+        {
+            "name": "Start Debug(Mac)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/test",
