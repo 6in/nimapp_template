@@ -7,10 +7,22 @@
         {
             "type": "gdb",
             "request": "launch",
-            "name": "Start Debug",
-            "target": "./bin/test" ,
+            "name": "Start Debug(Win/Linux)",
+            "target": "${workspaceFolder}/bin/test" ,
             "arguments": "test",
             "cwd": "${workspaceRoot}"
-        }
+        },
+        {
+            "name": "Start Debug(Mac/Linux)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/bin/test",
+            "args": ["test"],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "MIMode": "lldb"
+        },
     ]
 }

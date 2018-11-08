@@ -15,9 +15,11 @@ Options:
   --version          Show version.
 """
 
-# 引数チェック
-when isMainModule:
+proc start() : int =
   let args = docopt(doc, version = "nimapp_template 0.1.0")
   echo "args=>",args
-  let retCode = main(args)
-  quit(retCode)
+  result = main(args)
+
+# 引数チェック
+when isMainModule:
+  quit(start())
