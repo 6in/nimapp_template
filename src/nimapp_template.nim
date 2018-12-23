@@ -1,5 +1,6 @@
 import docopt
 import nimapp_templatepkg/main
+import version
 
 let doc = """
 nimapp_template.
@@ -16,9 +17,7 @@ Options:
 """
 
 proc start() : int =
-  const ver = staticExec(
-    "nim c -r --hints:off --verbosity:0 -o:../bin/test ../util/get_version.nim")    
-  let args = docopt(doc, version = "nimapp_template " & ver)
+  let args = docopt(doc, version = "nimapp_template " & current_version)
   echo "args=>",args
   result = main(args)
 
