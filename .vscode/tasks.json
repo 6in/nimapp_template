@@ -38,7 +38,7 @@
             // 現在のプロジェクトをデバッグビルドします
             "label": "Debug Project File",
             "type": "shell",
-            "command": "nim c -d:debug --debuginfo --lineDir:on --debugger:native --laxStrings:on --nilseqs:on --threads:on -o:${workspaceRoot}/bin/test ${workspaceRoot}/src/nimapp_template.nim",
+            "command": "nim c -r -d:debug --debuginfo --lineDir:on --debugger:native --laxStrings:on --nilseqs:on --threads:on -o:${workspaceRoot}/bin/test ${workspaceRoot}/src/nimapp_template.nim -v",
             "group": {
                 "kind": "build",
                 "isDefault": true

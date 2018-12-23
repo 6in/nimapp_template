@@ -7,16 +7,18 @@ nimapp_template.
 Usage:
   nimapp_template [--sample=<sample>] <name>
   nimapp_template (-h | --help)
-  nimapp_template --version
+  nimapp_template (-v | --version)
 
 Options:
   --sample=<sample>  sample option[default: abcdefg].
   -h --help          Show this screen.
-  --version          Show version.
+  -v --version       Show version.
 """
 
 proc start() : int =
-  let args = docopt(doc, version = "nimapp_template 0.1.0")
+  const ver = staticExec(
+    "nim c -r --hints:off --verbosity:0 -o:../bin/test ../util/get_version.nim")    
+  let args = docopt(doc, version = "nimapp_template " & ver)
   echo "args=>",args
   result = main(args)
 
