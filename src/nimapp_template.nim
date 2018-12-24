@@ -1,6 +1,7 @@
 import docopt
 import nimapp_templatepkg/main
 
+# get nimble's values
 include nimble_config
 include ../nimapp_template.nimble
 
