@@ -1,6 +1,8 @@
 import docopt
 import nimapp_templatepkg/main
-import version
+
+include nimble_config
+include ../nimapp_template.nimble
 
 let doc = """
 nimapp_template.
@@ -17,7 +19,7 @@ Options:
 """
 
 proc start() : int =
-  let args = docopt(doc, version = "nimapp_template " & current_version)
+  let args = docopt(doc, version = "nimapp_template " & version)
   echo "args=>",args
   result = main(args)
 
