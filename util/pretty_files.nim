@@ -13,11 +13,11 @@ proc pretty_proc(startDir: string) =
 when isMainModule:
   let
     cmdArgs = os.commandLineParams()
-
-  let target_dir = if cmdArgs.len == 1:
-    os.expandFilename(cmdArgs[0])
-  else:
-    os.expandFileName(".")
+    target_dir =
+      if cmdArgs.len == 1:
+        os.expandFilename(cmdArgs[0])
+      else:
+        os.expandFileName(".")
 
   echo target_dir
   pretty_proc(target_dir)
