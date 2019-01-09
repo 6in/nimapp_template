@@ -19,9 +19,9 @@ Options:
   -v --version       Show version.
 """
 
-proc start() : int =
+proc start(): int =
   let args = docopt(doc, version = "nimapp_template " & version)
-  echo "args=>",args
+  echo "args=>", args
   result = main(args)
 
 # 引数チェック

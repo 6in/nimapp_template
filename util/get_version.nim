@@ -3,7 +3,7 @@ import os
 import nre, options, strutils
 import strformat
 
-let 
+let
   cmdArgs = os.commandLineParams()
   pkgName = cmdArgs[0]
 

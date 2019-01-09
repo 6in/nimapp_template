@@ -49,6 +49,7 @@ $ nimble run
 | build | デバッグビルドを行います |
 | install | リリースビルドを行います |
 | rename | テンプレートを置換します |
+| pretty | カレントディレクトリ配下のnimソースをnimprettryでフォーマット化します |
 
 ### renameタスクについて
 

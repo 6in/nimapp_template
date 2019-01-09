@@ -4,7 +4,7 @@ import nimapp_templatepkg/private/main_impl
 
 # sample from https://github.com/nim-lang/Nim/blob/master/examples/tunit.nim
 
-suite "my suite2": 
+suite "my suite2":
   setup:
     echo "before test"
 
@@ -16,11 +16,10 @@ suite "my suite2":
     check:
       say_hello_to("nim") == "{{hello [[nim]]}}"
       say_hello_to("c") == "{{hello [[c]]}}"
-      
+
   test "call method2":
     echo "call method2"
     check:
       say_hello_to("nim") == "{{hello [[nim]]}}"
       say_hello_to("c") == "{{hello [[c]]}}"
-    
-    
+
