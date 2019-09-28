@@ -5,8 +5,8 @@ import osproc
 proc pretty_proc(startDir: string) =
   for f in walkDirRec(startDir, yieldFilter = {pcFile}):
     if f.endsWith(".nim"):
-      let process = startProcess("nimpretty", startDir, @["--backup:on", f], nil,
-          options = {poUsePath, poStdErrToStdOut})
+      let process = startProcess("nimpretty", startDir, @["--backup:on", f],
+          nil, options = {poUsePath, poStdErrToStdOut})
       echo f
       discard process.waitForExit()
 

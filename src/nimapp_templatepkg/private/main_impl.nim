@@ -4,7 +4,7 @@ proc c_sprintf(buf: array[0..2500, char],
 
 proc say_hello_to_imple (name: string): string = "hello [[" & name & "]]"
 
-proc say_hello_to* (name: string): string =
+proc say_hello_to*(name: string): string =
   let msg = say_hello_to_imple(name)
 
   var buf {.noinit.}: array[0..2500, char]

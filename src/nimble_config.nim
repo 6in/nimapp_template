@@ -7,7 +7,8 @@ var
 proc requires(deps: varargs[string]) = discard
 proc getPkgDir(): string = discard
 
-template task(name: untyped; description: string; body: untyped): untyped = discard
+template task(name: untyped; description: string;
+    body: untyped): untyped = discard
 template before(action: untyped; body: untyped): untyped = discard
 template after(action: untyped; body: untyped): untyped = discard
 template builtin = discard

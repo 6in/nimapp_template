@@ -28,11 +28,9 @@ task test2, "テスト実行":                  # デフォルトのtestコマ�
   exec "nim " & backend & " -r tests/alltest"
 
 task clean, "キャッシュのクリア":
-  rmDir "bin"
   rmDir "src/nimcache"
   rmDir "tests/nimcache"
   rmDir "util/nimcache"
-  mkDir "bin"
 
 task rename, "プロジェクト名を伴うファイル名・内容を置換します":
   rmDir ".git"
