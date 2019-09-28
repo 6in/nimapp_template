@@ -1,4 +1,4 @@
 */nimcache/
-bin/test
+bin/*
 *.exe
 *.backup

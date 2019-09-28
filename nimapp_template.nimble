@@ -14,7 +14,7 @@ backend       = "c"                       # デフォルトはc
 
 # Dependencies
 
-requires "nim >= 0.19.0"
+requires "nim >= 1.0.0"
 requires "docopt >= 0.6.7"
 
 task run, "アプリケーションを実行します":
