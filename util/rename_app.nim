@@ -1,7 +1,6 @@
 # プロジェクト名を取得し、ディレクトリ・ファイル・内容を置換します
 
 import os
-import ospaths
 import strutils
 
 type
@@ -17,8 +16,8 @@ proc get_files(path: string, dir: bool): seq[string] =
 
     # 探索スキップチェック
     for name in file.split(DirSep):
-      if name.startsWith("nimcache") or name.startsWith(
-          "bin") or name.startsWith(".git"):
+      if name.startsWith("nimcache") or name.startsWith("bin") or
+          name.startsWith(".git") or name.endsWith(".nims"):
         skip_flag = true
         break
 
@@ -26,7 +25,7 @@ proc get_files(path: string, dir: bool): seq[string] =
       continue
 
     if dir:
-      new_file = ospaths.splitPath(new_file).head
+      new_file = os.splitPath(new_file).head
       if result.contains(new_file) == true:
         continue
     result.add new_file[path_len+1 .. new_file.len()-1]
@@ -82,7 +81,7 @@ when isMainModule:
     cmdArgs = os.commandLineParams()
     target_dir = os.expandFilename(cmdArgs[0])
     package_name = cmdArgs[1]
-    new_package_name = ospaths.splitPath(target_dir).tail
+    new_package_name = os.splitPath(target_dir).tail
 
   if package_name == new_package_name:
     echo "オリジナルのテンプレートなので終了します"
@@ -107,3 +106,5 @@ when isMainModule:
     if tmp_file.changed:
       echo "mv ", $tmp_file.file, " ", new_file
       discard move_file(tmp_file.file, new_file)
+
+  

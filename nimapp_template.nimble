@@ -37,6 +37,7 @@ task rename, "プロジェクト名を伴うファイル名・内容を置換し
   mkDir "bin"
   exec "nim c -r --hints:off --verbosity:0 --out:bin/rename_app util/rename_app.nim . " & packageName
   rmDir "src/" & packageName & "pkg"
+  exec "rm nimapp_template_*.nims"
   exec "nimble clean"
 
 task rename_test, "リネームテスト用":
@@ -45,6 +46,7 @@ task rename_test, "リネームテスト用":
   exec "cp -rp . ../nimapp_template2"
   exec "nim c -r --hints:off --verbosity:0 --out:bin/rename_app util/rename_app.nim ../nimapp_template2 " & packageName
   rmDir "../nimapp_template2/src/" & packageName & "pkg"
+  exec "rm ../nimapp_template2/nimapp_template_*.nims"
 
 task pretty, "ソースの整形" :
   exec "nim c -r --hints:off --verbosity:0 --out:bin/test util/pretty_files"
