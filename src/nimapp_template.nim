@@ -22,7 +22,7 @@ Options:
 
 proc start(): int =
   let args = docopt(doc, version = "nimapp_template " & version)
-  debug "args=>", args
+  debug args
   result = main(args)
 
 # 引数チェック
