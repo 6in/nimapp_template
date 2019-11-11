@@ -1,5 +1,6 @@
 import docopt
 import nimapp_templatepkg/main
+import ../util/debug
 
 # get nimble's values
 include nimble_config
@@ -21,7 +22,7 @@ Options:
 
 proc start(): int =
   let args = docopt(doc, version = "nimapp_template " & version)
-  echo "args=>", args
+  debug "args=>", args
   result = main(args)
 
 # 引数チェック
