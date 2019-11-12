@@ -6,12 +6,17 @@ macro debug*(n: varargs[untyped]): untyped =
   var buff = fmt"""
 when defined(debug):
   block:
-    var 
-      tty = open("/dev/tty", fmReadWrite)
-      oldOut = stdout
+    var useTty = false
+    let tty = 
+      try:
+        let term = open("/dev/tty", fmWrite)
+        useTty = true          
+        term
+      except IOError:
+        stdout
     defer:
-      stdout = oldOut
-      tty.close
+      if useTty:
+        tty.close
     tty.writeLine ("[debug] ---------------------------")
 """
   # get max variable length

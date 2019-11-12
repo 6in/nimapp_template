@@ -8,7 +8,7 @@
             "type": "gdb",
             "request": "launch",
             "name": "Start Debug(Win/Linux)",
-            "target": "${workspaceFolder}/bin/test" ,
+            "target": "${workspaceFolder}/bin/test",
             "arguments": "test",
             "cwd": "${workspaceRoot}"
         },
@@ -17,7 +17,9 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/test",
-            "args": ["test"],
+            "args": [
+                "test"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
@@ -29,7 +31,9 @@
             "type": "cppdbg",
             "request": "launch",
             "program": "${workspaceFolder}/bin/test",
-            "args": ["test"],
+            "args": [
+                "test"
+            ],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
             "environment": [],
