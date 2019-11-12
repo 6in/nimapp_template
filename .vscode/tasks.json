@@ -35,6 +35,17 @@
             "problemMatcher": []
         },
         {
+            // 現在のプロジェクトをデバッグビルド＆実行します
+            "label": "Run Current File",
+            "type": "shell",
+            "command": "nim c -r -d:debug --debuginfo --lineDir:on --debugger:native --laxStrings:on --nilseqs:on --threads:on -o:${workspaceRoot}/bin/test ${file} aaa",
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        },
+        {
             // 現在のプロジェクトをデバッグビルドします
             "label": "Debug Project File",
             "type": "shell",

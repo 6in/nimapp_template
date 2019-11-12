@@ -40,7 +40,6 @@ when defined(debug):
       let name = " ".repeat(maxLen - ($x).len) & $x
       buff = buff & fmt"""
     tty.writeLine ("[debug] {name} => " & ${repr(x)})
-  # tty.writeLine ("[debug] ---------------------------")
 """
   buff = buff & """
     tty.writeLine ("[debug] ---------------------------")
@@ -48,7 +47,7 @@ when defined(debug):
   # echo buff
   parseStmt(buff)
 
-macro if_debug(head: untyped, body: untyped): untyped =
+macro if_debug*(head: untyped, body: untyped): untyped =
   let bodies = repr(body).replace("\x0a", "\x0a  ")
   let stmt = fmt"""
 when defined(debug): 
@@ -64,9 +63,11 @@ when isMainModule:
 
   echo "start"
   let a = 123
-  let bbbb = "ABCD"
-  let cc = sample(a, bbbb)
-  debug("parameters", a, bbbb, "result", cc)
+  let b = "ヒャッハー"
+  let c = sample(a, b)
+  debug(
+    "parameters", a, b,
+    "result", c)
 
   # debug block
   if_debug("step 1"):
